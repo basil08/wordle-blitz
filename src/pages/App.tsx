@@ -4,24 +4,19 @@ import { ClockIcon } from '@heroicons/react/outline'
 import { format } from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 import { useEffect, useState } from 'react'
-import Countdown from 'react-countdown'
 import Div100vh from 'react-div-100vh'
 import { Navigate } from 'react-router-dom'
 
 import { AlertContainer } from '../components/alerts/AlertContainer'
 import { Grid } from '../components/grid/Grid'
 import { Keyboard } from '../components/keyboard/Keyboard'
-import { DatePickerModal } from '../components/modals/DatePickerModal'
 import { InfoModal } from '../components/modals/InfoModal'
-import { MigrateStatsModal } from '../components/modals/MigrateStatsModal'
 import { SettingsModal } from '../components/modals/SettingsModal'
-import { StatsModal } from '../components/modals/StatsModal'
 import { Navbar } from '../components/navbar/Navbar'
 import {
   BASE_URL,
   DATE_LOCALE,
   DISCOURAGE_INAPP_BROWSERS,
-  LONG_ALERT_TIME_MS,
   MAX_CHALLENGES,
   REVEAL_TIME_MS,
   WELCOME_INFO_MODAL_MS,
@@ -30,11 +25,7 @@ import {
   CORRECT_WORD_MESSAGE,
   COUNTDOWN,
   DISCOURAGE_INAPP_BROWSER_TEXT,
-  GAME_COPIED_MESSAGE,
-  HARD_MODE_ALERT_MESSAGE,
   NOT_ENOUGH_LETTERS_MESSAGE,
-  SHARE_FAILURE_TEXT,
-  WIN_MESSAGES,
   WORD_NOT_FOUND_MESSAGE,
 } from '../constants/strings'
 import { useAlert } from '../context/AlertContext'
@@ -50,12 +41,10 @@ import {
 } from '../lib/localStorage'
 import { addStatsForCompletedGame, loadStats } from '../lib/stats'
 import {
-  findFirstUnusedReveal,
   getGameDate,
   getIsLatestGame,
   getSolution,
   isWordInWordList,
-  setGameDate,
   unicodeLength,
 } from '../lib/words'
 

@@ -1,8 +1,6 @@
 import { ClockIcon, ShareIcon } from '@heroicons/react/outline'
-import { format } from 'date-fns'
 
 import {
-  DATE_LOCALE,
   ENABLE_ARCHIVED_GAMES,
   ENABLE_MIGRATE_STATS,
 } from '../../constants/settings'
@@ -15,7 +13,6 @@ import {
 } from '../../constants/strings'
 import { GameStats } from '../../lib/localStorage'
 import { shareStatus } from '../../lib/share'
-// import { solutionGameDate, tomorrow } from '../../lib/words'
 import { Histogram } from '../stats/Histogram'
 import { MigrationIntro } from '../stats/MigrationIntro'
 import { StatBar } from '../stats/StatBar'
