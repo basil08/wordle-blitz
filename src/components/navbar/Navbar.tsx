@@ -23,7 +23,7 @@ export const Navbar = ({
 }: Props) => {
   return (
     <div className="navbar">
-      <div className="navbar-content px-5 short:h-auto">
+      <div className="navbar-content px-6">
         <div className="flex">
           <InformationCircleIcon
             className="h-6 w-6 cursor-pointer dark:stroke-white"
@@ -36,12 +36,23 @@ export const Navbar = ({
             />
           )}
         </div>
-        <p className="text-xl font-bold dark:text-white">{GAME_TITLE}</p>
+        <div className="flex flex-col">
+          <p className="text-center text-xl font-bold dark:text-white">
+            {GAME_TITLE}
+          </p>
+          <div className="text-center text-xs text-black dark:text-gray-500">
+            {' '}
+            <a href="https://instagram.com/basil.icious">
+              Made with ❤️ by <strong>Basil</strong>
+            </a>
+          </div>
+        </div>
+
         <div className="right-icons">
-          <ChartBarIcon
+          {/* <ChartBarIcon
             className="mr-3 h-6 w-6 cursor-pointer dark:stroke-white"
             onClick={() => setIsStatsModalOpen(true)}
-          />
+          /> */}
           <CogIcon
             className="h-6 w-6 cursor-pointer dark:stroke-white"
             onClick={() => setIsSettingsModalOpen(true)}
