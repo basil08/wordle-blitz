@@ -1,10 +1,38 @@
 const gameStateKey = 'gameState'
 const archiveGameStateKey = 'archiveGameState'
 const highContrastKey = 'highContrast'
+const myGameKey = 'MY_GAME'
 
 export type StoredGameState = {
   guesses: string[]
   solution: string
+}
+
+export const isAuthenticated = () => {
+  return localStorage.getItem('token')
+}
+export type StoredCurrentRoundGameState = {
+  round: number
+  word: String
+  didWin: boolean
+  didLose: boolean
+  numGuesses: number
+  timestamp: number | null
+}
+
+export const saveCurrentRoundDataToLocalStorage = (
+  gameState: StoredCurrentRoundGameState
+) => {
+  const states = localStorage.getItem(myGameKey)
+
+  if (!states) {
+    const newArray = new Array<StoredCurrentRoundGameState>(gameState)
+    localStorage.setItem(myGameKey, JSON.stringify(newArray))
+  } else {
+    const parsedStates = JSON.parse(states) as StoredCurrentRoundGameState[]
+    parsedStates.push(gameState)
+    localStorage.setItem(myGameKey, JSON.stringify(parsedStates))
+  }
 }
 
 export const saveGameStateToLocalStorage = (

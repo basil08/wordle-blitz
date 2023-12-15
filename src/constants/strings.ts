@@ -1,4 +1,5 @@
 export const GAME_TITLE = process.env.REACT_APP_GAME_NAME!
+export const COUNTDOWN = process.env.COUNTDOWN
 
 export const WIN_MESSAGES = ['Great Job!', 'Awesome', 'Well done!']
 export const GAME_COPIED_MESSAGE = 'Game copied to clipboard'

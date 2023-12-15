@@ -107,14 +107,15 @@ export const isValidGameDate = (date: Date) => {
   return differenceInDays(firstGameDate, date) % periodInDays === 0
 }
 
-export const getIndex = (gameDate: Date) => {
-  let start = firstGameDate
-  let index = -1
-  do {
-    index++
-    start = addDays(start, periodInDays)
-  } while (start <= gameDate)
+export const getIndex = () => {
+  // let start = firstGameDate
+  // let index = -1
+  // do {
+  //   index++
+  //   start = addDays(start, periodInDays)
+  // } while (start <= gameDate)
 
+  const index = Math.floor(Math.random() * WORDS.length)
   return index
 }
 
@@ -126,15 +127,14 @@ export const getWordOfDay = (index: number) => {
   return localeAwareUpperCase(WORDS[index % WORDS.length])
 }
 
-export const getSolution = (gameDate: Date) => {
-  const nextGameDate = getNextGameDate(gameDate)
-  const index = getIndex(gameDate)
+export const getSolution = () => {
+  // const nextGameDate = getNextGameDate(gameDate)
+  const index = getIndex()
   const wordOfTheDay = getWordOfDay(index)
+
   return {
     solution: wordOfTheDay,
-    solutionGameDate: gameDate,
     solutionIndex: index,
-    tomorrow: nextGameDate.valueOf(),
   }
 }
 
@@ -165,7 +165,7 @@ export const setGameDate = (d: Date) => {
   } catch (e) {
     console.log(e)
   }
-  window.location.href = '/'
+  window.location.href = '/game'
 }
 
 export const getIsLatestGame = () => {
@@ -176,5 +176,4 @@ export const getIsLatestGame = () => {
   return parsed === null || !('d' in parsed)
 }
 
-export const { solution, solutionGameDate, solutionIndex, tomorrow } =
-  getSolution(getGameDate())
+export const { solution, solutionIndex } = getSolution()

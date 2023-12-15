@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import React from 'react'
 
-import App from './App'
 import { GAME_TITLE } from './constants/strings'
+import App from './pages/App'
 
 beforeEach(() => {
   Object.defineProperty(window, 'matchMedia', {

@@ -2,16 +2,20 @@ import './index.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 
-import App from './App'
+import BaseWrapper from './BaseWrapper'
 import { AlertProvider } from './context/AlertContext'
 import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
-    <AlertProvider>
-      <App />
-    </AlertProvider>
+    <BrowserRouter>
+      <AlertProvider>
+        {/* <App /> */}
+        <BaseWrapper />
+      </AlertProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )
