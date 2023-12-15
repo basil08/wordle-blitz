@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState<String>()
   const [password, setPassword] = useState<String>()
   const [error, setError] = useState<String>()
+  const [isLogged, setIsLogged] = useState<Boolean>(isAuthenticated() !== null)
 
   const submit = (e: any) => {
     e.preventDefault()
@@ -29,7 +30,7 @@ const Login = () => {
       })
       .then((data) => {
         localStorage.setItem('token', data.token)
-        // setLoggedIn(true);
+        setIsLogged(true)
       })
       .catch((err) => {
         setError(
@@ -42,8 +43,8 @@ const Login = () => {
   return (
     <>
       {error && <div>{error}</div>}
-      {isAuthenticated() && <Navigate to="/game" />}
-      {!isAuthenticated() && (
+      {isLogged && <Navigate to="/game" />}
+      {!isLogged && (
         <section className="bg-gray-50 dark:bg-gray-900">
           <div className="mx-auto flex flex-col items-center justify-center px-6 py-8 md:h-screen lg:py-0">
             <div className="mb-6 flex items-center text-2xl font-semibold text-gray-900 dark:text-white">

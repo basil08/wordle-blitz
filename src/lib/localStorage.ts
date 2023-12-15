@@ -5,7 +5,6 @@ const myGameKey = 'MY_GAME'
 
 export type StoredGameState = {
   guesses: string[]
-  solution: string
 }
 
 export const isAuthenticated = () => {

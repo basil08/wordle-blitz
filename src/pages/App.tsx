@@ -52,7 +52,7 @@ function App() {
   const isLatestGame = getIsLatestGame()
   const gameDate = getGameDate()
   const prefersDarkMode = window.matchMedia(
-    '(prefers-color-scheme: dark)'
+    '(prefers-color-scheme: light)'
   ).matches
 
   const { showError: showErrorAlert, showSuccess: showSuccessAlert } =
@@ -66,13 +66,7 @@ function App() {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
   const [isGameLost, setIsGameLost] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem('theme')
-      ? localStorage.getItem('theme') === 'dark'
-      : prefersDarkMode
-        ? true
-        : false
-  )
+  const [isDarkMode, setIsDarkMode] = useState(false)
   //
   const initialCountDown = Number(COUNTDOWN) || 1800
   //
@@ -92,9 +86,14 @@ function App() {
   const [guesses, setGuesses] = useState<string[]>(
     () => {
       const loaded = loadGameStateFromLocalStorage(isLatestGame)
-      if (loaded?.solution !== solution) {
+      // if (loaded?.solution !== solution) {
+      //   return []
+      // }
+
+      if (!loaded) {
         return []
       }
+
       const gameWasWon = loaded.guesses.includes(solution)
       // if (gameWasWon) {
       //   setIsGameWon(true)
@@ -105,10 +104,16 @@ function App() {
       //     persist: true,
       //   })
       // }
-      return loaded.guesses
+      return loaded?.guesses
     }
     // []
   )
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      localStorage.removeItem('countdown')
+    }
+  }, [])
 
   const [stats, setStats] = useState(() => loadStats())
 
@@ -201,7 +206,7 @@ function App() {
   }
 
   useEffect(() => {
-    saveGameStateToLocalStorage(getIsLatestGame(), { guesses, solution })
+    saveGameStateToLocalStorage(getIsLatestGame(), { guesses })
   }, [guesses])
 
   // useEffect(() => {
@@ -408,7 +413,7 @@ function App() {
                     )}
 
                     {countdown > 0 && (
-                      <span className="m-3 p-3 text-lg font-medium text-white">
+                      <span className="m-3 p-3 text-lg font-medium text-black dark:text-white">
                         {new Date(countdown * 1000)
                           .toISOString()
                           .substring(14, 19)}
