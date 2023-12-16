@@ -25,12 +25,25 @@ const Login = () => {
       },
       body: JSON.stringify({ username: email, password: password }),
     })
-      .then((res) => {
-        return res.json()
+      .then(async (res) => {
+        if (res.status === 500) {
+          return {
+            success: false,
+            message: 'Password is incorrect! Please try again!',
+          }
+        }
+
+        return { success: true, token: await res.json() }
       })
       .then((data) => {
-        localStorage.setItem('token', data.token)
-        setIsLogged(true)
+        if (!data.success) {
+          return setError(data.message)
+        }
+        if (data.success && data.token) {
+          localStorage.setItem('token', data.token.token)
+          setError('')
+          setIsLogged(true)
+        }
       })
       .catch((err) => {
         setError(
@@ -42,7 +55,18 @@ const Login = () => {
 
   return (
     <>
-      {error && <div>{error}</div>}
+      {error && (
+        <>
+          <div className=" ">
+            <div
+              className="relative rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
+              role="alert"
+            >
+              {error}
+            </div>
+          </div>
+        </>
+      )}
       {isLogged && <Navigate to="/game" />}
       {!isLogged && (
         <section className="bg-gray-50 dark:bg-gray-900">
@@ -70,7 +94,7 @@ const Login = () => {
                       id="email"
                       onChange={(e) => setEmail(e.target.value)}
                       className="focus:ring-primary-600 focus:border-primary-600 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-                      placeholder="amogh@madarchod.com"
+                      placeholder="amogh@nashedi.com"
                       required
                     />
                   </div>
