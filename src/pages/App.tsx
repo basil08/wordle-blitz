@@ -382,7 +382,7 @@ function App() {
     <>
       {isAuthenticated() ? (
         isGameOver ? (
-          <Navigate to="/over" />
+          <Navigate to="/result" />
         ) : (
           <Div100vh>
             <div className="flex h-full flex-col">
